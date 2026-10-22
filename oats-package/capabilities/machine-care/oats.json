@@ -1,0 +1,25 @@
+{
+  "capability": "oats.machine-care",
+  "version": "0.1.0",
+  "compatibility": {
+    "oats": ">=0.61.0"
+  },
+  "description": "Caring for one computer on which OATS agents run: take stock of it, keep it and its agent tooling current within clear limits, route requests to the right agent, and hand anything that needs a human (sudo, logins, purchases, outward acts) to the person as a task. Assigned to the steward and technician souls.",
+  "requires": [
+    {
+      "command": "oats",
+      "why": "read the deployments on this machine, their instances and readiness; spawn technicians; raise attention"
+    },
+    {
+      "command": "aw",
+      "why": "mail and chat with the person's agents, and create tasks for the person"
+    }
+  ],
+  "inject": "injects/machine-care.md",
+  "skills": [
+    "skills/machine-survey",
+    "skills/machine-upkeep",
+    "skills/route-a-request",
+    "skills/ask-the-person"
+  ]
+}

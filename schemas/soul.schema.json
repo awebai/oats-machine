@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oats.dev/schemas/soul-v2.json",
+  "title": "Soul declaration v2 (soul.yaml)",
+  "description": "Authored shape only. A soul names each capability WITH WHERE IT COMES FROM (`from: here | <repo key> | package`) — a location, never a version. Core-capability payloads (knowledge, messaging, tasks) are opaque to the kernel; `none` empties the slot. Membership, privacy and team semantics are enforced by discovery/resolution, not here.",
+  "type": "object",
+  "required": ["schemaVersion", "name", "description", "work"],
+  "additionalProperties": false,
+  "properties": {
+    "launch": { "description": "The soul's launch preference (0.30; feature launch-preference): what the role should run on. Only harness and model: args, env, yolo and the executable stay host facts (launch configurations). A machine overrides it in oats-local.yaml souls.launch; explicit flags win over both. A committed soul gains it only when every deployment runs 0.30 (0.29 refuses the key).",  "type": "object", "additionalProperties": false, "required": ["harness"], "properties": { "harness": { "enum": ["pi", "claude", "codex"], "description": "The harness the role should run on." }, "model": { "type": "string", "minLength": 1, "pattern": "^[^\\s-][^\\s]*$", "description": "A model id for that harness; absent: the harness's own model." } } },
+    "schemaVersion": { "const": 2 },
+    "name": { "$ref": "#/$defs/slug" },
+    "description": { "type": "string" },
+    "work": { "enum": ["worktree", "checkout", "directory", "workspace"] },
+    "private": { "type": "boolean", "deprecated": true,
+      "description": "Tolerated and ignored: souls have no private mode. Every soul of a confirmed member is listed and spawnable; discovery warns soul-private-ignored. Accepted so existing files still validate; remove it." },
+    "capabilities": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/capabilityName" },
+      "additionalProperties": { "$ref": "#/$defs/capabilityChoice" }
+    },
+    "knowledge": { "$ref": "#/$defs/slotPayload" },
+    "messaging": { "$ref": "#/$defs/slotPayload" },
+    "tasks": { "$ref": "#/$defs/slotPayload" },
+    "compatibility": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/capabilityName" },
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "description": "Optional FLOORS on package versions (semver ranges) — constraints, not sources."
+    }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "capabilityName": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+    "repoKey": { "type": "string", "pattern": "^[^\\s@/][^\\s@]*/[^\\s@]+$" },
+    "fromLocation": {
+      "anyOf": [
+        { "const": "package" },
+        { "const": "here" },
+        { "$ref": "#/$defs/repoKey" }
+      ]
+    },
+    "capabilityRef": {
+      "type": "object",
+      "required": ["from"],
+      "additionalProperties": false,
+      "properties": { "from": { "$ref": "#/$defs/fromLocation" } }
+    },
+    "capabilityChoice": { "anyOf": [{ "$ref": "#/$defs/capabilityRef" }, { "const": "off" }] },
+    "slotPayload": {
+      "anyOf": [{ "const": "none" }, { "type": "object" }],
+      "description": "Opaque payload for the slot's core capability, or `none` to leave the slot empty."
+    }
+  }
+}
