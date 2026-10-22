@@ -16,5 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install the OATS CLI the package is tested against
+        run: npm install -g @awebai/oats@0.67.1
       - name: Validate package and run tests
         run: npm test

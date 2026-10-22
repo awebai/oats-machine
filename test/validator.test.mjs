@@ -17,7 +17,7 @@ function fixture(t) {
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   cpSync(REPO, dir, {
     recursive: true,
-    filter: (src) => !src.includes(`${REPO}/.git`) && !src.includes(`${REPO}/node_modules`),
+    filter: (src) => src !== `${REPO}/.git` && !src.startsWith(`${REPO}/.git/`) && !src.startsWith(`${REPO}/node_modules`),
   });
   return dir;
 }
@@ -65,4 +65,10 @@ test("validator rejects a soul whose from: here names no package capability", (t
   const result = mutate(t, "oats-package/souls/technician/soul.yaml", (text) => text.replace("oats.machine-care:", "oats.machine-other:"));
   assert.equal(result.status, 1);
   assert.match(result.stderr, /from: here names unknown package capability oats\.machine-other/);
+});
+
+test("validator rejects a capability manifest that breaks the schema", (t) => {
+  const result = mutate(t, `${CARE}/oats.json`, (text) => text.replace('"oats.machine-care"', '"Machine Care"'));
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /machine-care\/oats\.json\/capability/);
 });

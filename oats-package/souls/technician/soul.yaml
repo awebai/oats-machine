@@ -1,6 +1,6 @@
 schemaVersion: 2
 name: technician
-description: "Machine technician: takes one machine problem from the steward (a crash, an upgrade, a configuration change), investigates or makes the change with a copy of everything it touches, has it reviewed, reports back and retires"
+description: "Machine technician: takes one machine problem from the steward (a crash to explain, or a configuration change the person agreed to), investigates or makes the change with a copy of everything it touches, has it reviewed, reports back and retires"
 # Short-lived: one problem per instance.
 work: directory
 capabilities:

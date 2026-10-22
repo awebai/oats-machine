@@ -249,7 +249,10 @@ for (const [index, soulDir] of (Array.isArray(packageManifest?.souls) ? packageM
   }
 }
 
-const knownSkills = new Set(skillNames.keys());
+// Skills a soul here gets from another package's capability (the steward holds
+// oats.setup from oats.framework); the skills may name them.
+const EXTERNAL_SKILLS = new Set(["oats-upgrade"]);
+const knownSkills = new Set([...skillNames.keys(), ...EXTERNAL_SKILLS]);
 for (const { manifest, root } of capabilities) {
   const markdown = [];
   if (manifest.inject) markdown.push(join(root, manifest.inject));

@@ -2,7 +2,7 @@
   "capability": "oats.machine-care",
   "version": "0.1.0",
   "compatibility": {
-    "oats": ">=0.61.0"
+    "oats": ">=0.67.1"
   },
   "description": "Caring for one computer on which OATS agents run: take stock of it, keep it and its agent tooling current within clear limits, route requests to the right agent, and hand anything that needs a human (sudo, logins, purchases, outward acts) to the person as a task. Assigned to the steward and technician souls.",
   "requires": [
@@ -12,7 +12,7 @@
     },
     {
       "command": "aw",
-      "why": "mail and chat with the person's agents, and create tasks for the person"
+      "why": "mail and chat with agents, and aweb tasks (aw task) assigned to the person, which they see on the aweb dashboard's Tasks page"
     }
   ],
   "inject": "injects/machine-care.md",

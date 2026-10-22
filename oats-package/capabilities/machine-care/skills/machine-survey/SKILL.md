@@ -45,10 +45,14 @@ Only look; never install from here (see `/machine-upkeep`).
 ## 4. The agents on this machine
 
 - `oats deployments` lists every deployment the machine knows.
-- In each deployment: `oats status --json` (instances, running or stopped, and
-  who is waiting on the person) and `oats readiness --json` (what would stop a
-  spawn or a launch).
-- The OATS tmux server: `tmux -L oats ls`.
+- For each one, pass its path, or the command reads your own deployment:
+  - `oats status --dir <deployment> --json`: its instances, running or
+    stopped, each one's identity, and who is waiting on the person.
+  - `oats readiness --soul <name> --dir <deployment> --json` for a soul, or
+    `oats readiness --home <abs> --json` for one instance: what would stop a
+    spawn or a launch. Readiness always needs one or the other.
+- The OATS tmux server: `tmux -L oats ls`. "No server running" is normal when
+  no instance is running.
 
 Report an instance that is stopped but expected to run, one that is waiting
 on the person, or a readiness failure. Don't fix another deployment's
@@ -58,5 +62,6 @@ instances yourself; tell that deployment's coordinator (`/route-a-request`).
 
 Write a dated **Machine** section in your STATE.md: one line per area, with the
 finding and the command behind it, and a short list of what needs action and
-by whom. On the next survey, compare against it and report what changed. Only
-mail the person when something needs them (`/ask-the-person`).
+by whom. On the next survey, compare against it and report what changed.
+Bring something to the person only when it needs them, and then through
+`/ask-the-person`.
