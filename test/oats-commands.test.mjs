@@ -26,12 +26,25 @@ function oatsVerbs(text) {
   return code.flatMap((snippet) => [...snippet.matchAll(/(?:^|[\s(])(?<!-L )oats ([a-z][a-z-]*)/g)].map((m) => m[1]));
 }
 
-const help = spawnSync("oats", ["--help"], { encoding: "utf8" });
-const kernelVerbs = help.status === 0
-  ? new Set([...help.stdout.matchAll(/^\s+oats ([a-z][a-z-]*)/gm)].map((m) => m[1]))
-  : null;
+// The kernel the package's compatibility floor names.
+const FLOOR = JSON.parse(readFileSync(join(PAYLOAD, "oats-package.json"), "utf8")).compatibility.oats.replace(/^>=/, "");
+const atLeast = (version, floor) => {
+  const [a, b] = [version, floor].map((v) => v.split(".").map(Number));
+  for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return a[i] > b[i];
+  return true;
+};
 
-test("every oats command the package names exists in the kernel", { skip: kernelVerbs ? false : "oats is not installed" }, () => {
+const versionRun = spawnSync("oats", ["version", "--json"], { encoding: "utf8" });
+const installed = versionRun.status === 0 ? JSON.parse(versionRun.stdout).version : null;
+const skip = !installed ? `oats is not installed; install @awebai/oats@${FLOOR} to run this check`
+  : !atLeast(installed, FLOOR) ? `oats ${installed} is below the package floor ${FLOOR}`
+  : false;
+if (skip) process.stderr.write(`oats-commands: skipped: ${skip}\n`);
+
+const help = skip ? null : spawnSync("oats", ["--help"], { encoding: "utf8" });
+const kernelVerbs = help ? new Set([...help.stdout.matchAll(/^\s+oats ([a-z][a-z-]*)/gm)].map((m) => m[1])) : null;
+
+test("every oats command the package names exists in the kernel", { skip }, () => {
   const unknown = [];
   for (const file of markdownFiles(PAYLOAD)) {
     for (const verb of oatsVerbs(readFileSync(file, "utf8"))) {

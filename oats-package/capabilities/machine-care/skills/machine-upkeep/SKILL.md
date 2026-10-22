@@ -42,13 +42,28 @@ tool's own upgrade path, never a bare `npm install -g`:
   steward carries it out with `/oats-upgrade` from `oats.setup`. That skill
   reads the steps from the latest release, shows the whole plan, and takes
   each step on the person's yes. A technician doesn't upgrade OATS.
-  - If your `oats.setup` doesn't have that skill yet (it ships after
-    `oats.framework` 1.13.5), follow the procedure it encodes: read
-    `docs/upgrading.md` and each newer release's `## Upgrade` section at the
-    latest release's tag in awebai/oats, never the installed copy. Show the
-    whole plan, then take each step on the person's yes.
-- **aw:** `aw upgrade`. If it fails, report the exact error; never retry with
-  sudo or a different install method.
+  - **Until a released `oats.framework` ships that skill** (1.13.5 doesn't),
+    follow these rules from it, by hand. Replace this list with
+    `/oats-upgrade` once it ships.
+    1. Read `docs/upgrading.md` and each newer release's `## Upgrade`
+       section at the latest release's tag in awebai/oats, never the
+       installed copy. Show the whole plan, then take each step on the
+       person's yes.
+    2. **The Desktop first**, when it is installed: an older Desktop
+       refuses a newer CLI.
+    3. **The CLI with `npm install -g` only when** `realpath "$(oats root)"`
+       equals `realpath "$(npm prefix -g)/lib/node_modules/@awebai/oats"`. On a
+       mismatch, or on EACCES, stop and hand the step to the person
+       (`/ask-the-person`).
+    4. **Each deployment:** `oats update --check --dir <deployment>`. Its plan
+       must only move bridges; anything else goes back to the person. Then
+       `oats update --yes --dir <deployment>`.
+    5. **Afterwards:** `oats doctor <deployment>` for each deployment.
+- **aw:** run `aw version`, then `aw upgrade`, then `aw version` again. If it
+  fails, report the exact error; never retry with sudo or another install
+  method. After a successful upgrade, restart the running listeners that use
+  aw (the host wake broker, and any session's channel through
+  `oats session restart --home <abs>`) on the person's yes, then survey again.
 - **A harness or a plugin:** use the way it was installed. On Omarchy, the
   harnesses are installed with mise, so check with `mise ls` before
   proposing anything.

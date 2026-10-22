@@ -27,10 +27,11 @@ doesn't need them.
    your soul has one: use the skill of the capability that fills your tasks
    slot (aweb tasks, Jira, Linear, ...) to assign the request to the person.
    Use their identity from a message they sent you; never guess it.
-3. **Mail, when they have a conversation with you.** You can't open a
-   conversation with a person; on aweb, only they can start one. When they
-   have written to you (their dashboard chat arrives as mail with a
-   `conversation_id`), add the request to that conversation.
+3. **Mail, when they have a conversation with you.** When they have written
+   to you (on aweb, their dashboard chat arrives as mail with a
+   `conversation_id`), add the request to that conversation. Don't open a new
+   one to them by their handle: a person's chat with you is the one they
+   opened.
 
 With no tasks slot, the attention flag and mail are how you reach them.
 

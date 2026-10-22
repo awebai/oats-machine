@@ -40,18 +40,20 @@ specifics come from other capabilities. On [Omarchy](https://omarchy.org), a
 desktop integration is planned in
 [oats-omarchy](https://github.com/awebai/oats-omarchy): the agent key would
 open the steward, and crash notifications would go to it. It doesn't ship
-yet. Today oats-omarchy's bar panel already shows the agents waiting on you,
-the steward included.
+yet.
 
 The steward also holds `oats.setup` from `oats.framework`: it administers the
 machine's own workspace, and upgrades OATS through that capability's upgrade
-procedure.
+procedure. That makes it the soul `oats onboard` suggests spawning first
+(`next.spawn`, the workspace's setup target) and the one that answers the
+operator-soul check.
 
 ## Use it
 
 Until it is in the official catalog, pin it by its Git tag:
 
 ```bash
+oats package add oats.framework v1.13.5     # the steward's oats.setup comes from it
 oats package add oats.machine git:github.com/awebai/oats-machine@v0.1.0
 oats sync
 oats spawn oats.machine/steward --name steward
