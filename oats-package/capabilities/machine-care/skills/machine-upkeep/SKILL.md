@@ -42,6 +42,11 @@ tool's own upgrade path, never a bare `npm install -g`:
   steward carries it out with `/oats-upgrade` from `oats.setup`. That skill
   reads the steps from the latest release, shows the whole plan, and takes
   each step on the person's yes. A technician doesn't upgrade OATS.
+  - If your `oats.setup` doesn't have that skill yet (it ships after
+    `oats.framework` 1.13.5), follow the procedure it encodes: read
+    `docs/upgrading.md` and each newer release's `## Upgrade` section at the
+    latest release's tag in awebai/oats, never the installed copy. Show the
+    whole plan, then take each step on the person's yes.
 - **aw:** `aw upgrade`. If it fails, report the exact error; never retry with
   sudo or a different install method.
 - **A harness or a plugin:** use the way it was installed. On Omarchy, the
