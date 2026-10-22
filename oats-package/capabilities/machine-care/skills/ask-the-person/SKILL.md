@@ -19,28 +19,21 @@ doesn't need them.
 
 ## Make it visible
 
-Do both:
-
 1. **Raise attention, from inside your own session:**
    `oats instance attention --message "<one line: what you need>"`. The
    desktop's waiting panel reads this, so the person sees you waiting on
    them. Clear it with `oats instance attention --clear` once answered.
-2. **Record it as an aweb task assigned to the person**, on your team:
-   `aw task create --title "<what>" --assignee <their alias> --description-file <file>`.
-   They see it on the aweb dashboard's Tasks page, and answer by mail or a
-   task comment.
-   - Use the alias from a message they sent you; never guess it.
-   - The oats.aweb inject says `aw task` isn't part of that integration. That
-     is about the messaging provider. This skill uses aweb tasks deliberately,
-     because the OATS tasks slot has no aweb provider today.
+2. **Create a task for the person in your deployment's tasks layer**, when
+   your soul has one: use the skill of the capability that fills your tasks
+   slot (aweb tasks, Jira, Linear, ...) to assign the request to the person.
+   Use their identity from a message they sent you; never guess it.
+3. **Mail, when they have a conversation with you.** You can't open a
+   conversation with a person; on aweb, only they can start one. When they
+   have written to you (their dashboard chat arrives as mail with a
+   `conversation_id`), add the request to that conversation.
 
-## Talking to the person by mail
-
-You can't open a conversation with a person; on aweb, only they can start
-one. When they have written to you (their dashboard chat arrives as mail with
-a `conversation_id`), reply on that conversation. Otherwise the attention
-flag and the task are how you reach them.
+With no tasks slot, the attention flag and mail are how you reach them.
 
 Then stop working on that item and get on with other work. Don't poll and
-don't re-ask. When the answer comes, act on it, close the task, clear the
-attention, and say what you did.
+don't re-ask. When the answer comes, act on it, close the task if there is
+one, clear the attention, and say what you did.

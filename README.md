@@ -22,8 +22,8 @@ Both souls get the `oats.machine-care` capability:
 - **route-a-request:** who handles what, how to brief a technician, and how
   to follow a request to its end.
 - **ask-the-person:** turning a sudo command, a login or a decision into a
-  prepared request that shows up in the person's waiting panel and on the aweb
-  dashboard's Tasks page.
+  prepared request that shows up in the person's waiting panel, and as a
+  task in the deployment's tasks layer when it has one.
 
 The souls never run sudo, never handle secrets, and never act outside the
 machine without the person's yes to that exact act.
@@ -57,9 +57,14 @@ oats sync
 oats spawn oats.machine/steward --name steward
 ```
 
-Give the workspace `oats.okf` as its knowledge default: what the steward and
-its technicians learn about the machine is harvested into the machine's
-knowledge base.
+Recommended workspace defaults:
+
+- **Knowledge:** `oats.okf`. What the steward and its technicians learn about
+  the machine is harvested into the machine's knowledge base.
+- **Tasks:** aweb tasks, once `oats.aweb` ships its `oats.aweb-tasks` provider
+  (`defaults.tasks: { oats.aweb-tasks: { from: package } }`), so a request for
+  you also lands on the aweb dashboard's Tasks page. The souls don't depend on
+  it: without a tasks slot they reach you through the waiting panel and mail.
 
 ## Develop it
 

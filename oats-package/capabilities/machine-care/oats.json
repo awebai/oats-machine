@@ -4,15 +4,15 @@
   "compatibility": {
     "oats": ">=0.67.1"
   },
-  "description": "Caring for one computer on which OATS agents run: take stock of it, keep it and its agent tooling current within clear limits, route requests to the right agent, and hand anything that needs a human (sudo, logins, purchases, outward acts) to the person as a task. Assigned to the steward and technician souls.",
+  "description": "Caring for one computer on which OATS agents run: take stock of it, keep it and its agent tooling current within clear limits, route requests to the right agent, and hand anything that needs a human (sudo, logins, purchases, outward acts) to the person as a request they see. Assigned to the steward and technician souls.",
   "requires": [
     {
       "command": "oats",
-      "why": "read the deployments on this machine, their instances and readiness; spawn technicians; raise attention"
+      "why": "read the deployments on this machine, their instances and readiness; spawn and retire technicians; raise attention for the person"
     },
     {
       "command": "aw",
-      "why": "mail and chat with agents, and aweb tasks (aw task) assigned to the person, which they see on the aweb dashboard's Tasks page"
+      "why": "mail and chat with agents, and with the person on a conversation they started"
     }
   ],
   "inject": "injects/machine-care.md",
