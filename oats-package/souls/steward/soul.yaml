@@ -1,0 +1,10 @@
+schemaVersion: 2
+name: steward
+description: "The steward of one computer: the person's front door on it, which keeps the machine and its agent tooling in good order, routes every request to whoever should handle it, and turns anything needing a human into a request they see; prepares and proposes, never acts outward or with sudo"
+# Long-running: one steward per machine, in the machine's own workspace.
+work: directory
+capabilities:
+  oats.machine-care: { from: here }
+  # The steward administers its machine's workspace, and upgrades OATS
+  # through oats.setup's own path (oats-upgrade).
+  oats.setup: { from: package }

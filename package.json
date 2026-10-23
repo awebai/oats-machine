@@ -1,0 +1,16 @@
+{
+  "name": "@awebai/oats-machine",
+  "version": "0.1.0",
+  "description": "OATS package for a machine steward: the front door and keeper of one computer, its technician, and the machine-care skills they share.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-package.mjs",
+    "test": "npm run validate && node --test test/*.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awebai/oats-machine"
+  }
+}
