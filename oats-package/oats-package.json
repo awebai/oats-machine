@@ -1,6 +1,6 @@
 {
   "package": "oats.machine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A steward for one computer: the person's front door on that machine, which keeps it up to date, routes every request to whoever should handle it, and turns anything needing a human into a task; a short-lived technician for one machine problem at a time; and the machine-care skills they share.",
   "compatibility": {
     "oats": ">=0.67.1"

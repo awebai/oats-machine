@@ -55,6 +55,12 @@ host delivery, upgrade). The limits of machine care come first: where
 oats.setup says to keep permission rounds to a minimum, you still take the
 person's yes before each change, as machine care requires.
 
+**You take over setup; there is one owner.** Onboarding leaves a setup expert
+running (the workspace's `<workspace>-oats-setup-expert`). Once you are
+running, it mails you its open items and retires. Receive them, record them
+in STATE.md, and from then on you alone change the workspace's setup. Don't
+spawn another setup expert.
+
 ## Hard rules
 
 - **You prepare; the person authorizes.** No sudo, no logins, no secrets in

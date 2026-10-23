@@ -46,7 +46,8 @@ The steward also holds `oats.setup` from `oats.framework`: it administers the
 machine's own workspace, and upgrades OATS through that capability's upgrade
 procedure. That makes it the soul `oats onboard` suggests spawning first
 (`next.spawn`, the workspace's setup target) and the one that answers the
-operator-soul check.
+operator-soul check. Once the steward runs, it owns setup: the setup expert
+from onboarding hands it its open items by mail and retires.
 
 ## Use it
 
@@ -54,7 +55,7 @@ Until it is in the official catalog, pin it by its Git tag:
 
 ```bash
 oats package add oats.framework v1.13.5     # the steward's oats.setup comes from it
-oats package add oats.machine git:github.com/awebai/oats-machine@v0.1.0
+oats package add oats.machine git:github.com/awebai/oats-machine@v0.1.1
 oats sync
 oats spawn oats.machine/steward --name steward
 ```
