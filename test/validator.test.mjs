@@ -44,9 +44,10 @@ test("validator rejects another package id", (t) => {
 });
 
 test("validator rejects a payload version that differs from package.json", (t) => {
-  const result = mutate(t, "package.json", (text) => text.replace('"version": "0.1.0"', '"version": "0.1.1"'));
+  const { version } = JSON.parse(readFileSync(join(REPO, "package.json"), "utf8"));
+  const result = mutate(t, "package.json", (text) => text.replace(`"version": "${version}"`, '"version": "9.9.9"'));
   assert.equal(result.status, 1);
-  assert.match(result.stderr, /must equal package\.json version 0\.1\.1/);
+  assert.match(result.stderr, /must equal package\.json version 9\.9\.9/);
 });
 
 test("validator rejects an inject that does not name one of its skills", (t) => {

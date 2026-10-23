@@ -1,6 +1,6 @@
 {
   "name": "@awebai/oats-machine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OATS package for a machine steward: the front door and keeper of one computer, its technician, and the machine-care skills they share.",
   "license": "MIT",
   "type": "module",
